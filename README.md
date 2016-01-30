@@ -1,2 +1,4 @@
-# LEDmePlayHardwareCheck
-Hardware Check for LEDmePlay
+# Hardware Check for LEDmePlay
+
+See:
+- http://mithotronic.de/ledmeplay.php
