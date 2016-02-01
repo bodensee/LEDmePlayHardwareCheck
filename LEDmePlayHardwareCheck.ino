@@ -82,7 +82,6 @@ void setup() {
   matrix.print("Panel");
   matrix.swapBuffers(false);
   delay(3000);
-
   // all pixels red
   matrix.fillScreen(matrix.Color333(7, 0, 0));
   matrix.swapBuffers(false);
@@ -95,6 +94,46 @@ void setup() {
   matrix.fillScreen(matrix.Color333(0, 0, 7));
   matrix.swapBuffers(false);
   delay(2000);
+  // brightness bars: white, red, green, blue as color333
+  matrix.fillScreen(0);
+  for (int x = 0; x < 8; ++x) {
+    matrix.fillRect(x * 4,  0, 4, 8, matrix.Color333(x, x, x));
+    matrix.fillRect(x * 4,  8, 4, 8, matrix.Color333(x, 0, 0));
+    matrix.fillRect(x * 4, 16, 4, 8, matrix.Color333(0, x, 0));
+    matrix.fillRect(x * 4, 24, 4, 8, matrix.Color333(0, 0, x));
+  }
+  matrix.swapBuffers(false);
+  delay(2000);
+  // brightness bars: white, red, green, blue as color444
+  matrix.fillScreen(0);
+  for (int x = 0; x < 16; ++x) {
+    matrix.fillRect(x * 2,  0, 2, 8, matrix.Color444(x, x, x));
+    matrix.fillRect(x * 2,  8, 2, 8, matrix.Color444(x, 0, 0));
+    matrix.fillRect(x * 2, 16, 2, 8, matrix.Color444(0, x, 0));
+    matrix.fillRect(x * 2, 24, 2, 8, matrix.Color444(0, 0, x));
+  }
+  matrix.swapBuffers(false);
+  delay(2000);
+  // brightness bars: white, red, green, blue as color888
+  matrix.fillScreen(0);
+  for (int x = 0; x < 32; ++x) {
+    matrix.drawLine(x,  0, x,  7, matrix.Color888(x * 4, x * 4, x * 4));
+    matrix.drawLine(x,  8, x, 15, matrix.Color888(x * 4, 0, 0));
+    matrix.drawLine(x, 16, x, 23, matrix.Color888(0, x * 4, 0));
+    matrix.drawLine(x, 24, x, 31, matrix.Color888(0, 0, x * 4));
+  }
+  matrix.swapBuffers(false);
+  delay(2000);
+  // brightness bars: white, red, green, blue as color888 with gamma correction
+  matrix.fillScreen(0);
+  for (int x = 0; x < 32; ++x) {
+    matrix.drawLine(x,  0, x,  7, matrix.Color888(x * 4, x * 4, x * 4, true));
+    matrix.drawLine(x,  8, x, 15, matrix.Color888(x * 4, 0, 0, true));
+    matrix.drawLine(x, 16, x, 23, matrix.Color888(0, x * 4, 0, true));
+    matrix.drawLine(x, 24, x, 31, matrix.Color888(0, 0, x * 4, true));
+  }
+  matrix.swapBuffers(false);
+  delay(2000);
 
   // test 2: audio
   matrix.fillScreen(0);
@@ -103,7 +142,6 @@ void setup() {
   matrix.setCursor(1, 16);
   matrix.print("Audio");
   matrix.swapBuffers(false);
-
   for (int hz = 31; hz <= 4978; hz = hz + 100) {
     tone(audio, hz);
     delay(80);
